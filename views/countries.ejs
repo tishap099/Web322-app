@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countries - Global Nations</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.19/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar bg-base-100">
+        <div class="flex-1">
+            <a href="/" class="btn btn-ghost text-xl">Global Nations</a>
+        </div>
+        <div class="flex-none">
+            <ul class="menu menu-horizontal px-1">
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/countries" class="active">Countries</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-4 py-8">
+        <h1 class="text-4xl font-bold text-center mb-8">All Countries</h1>
+
+        <!-- Search and Filter -->
+        <div class="flex flex-col md:flex-row gap-4 mb-8">
+            <input type="text" id="searchInput" placeholder="Search countries..." 
+                   class="input input-bordered w-full md:w-1/2" 
+                   oninput="filterCountries()">
+            <select id="regionFilter" class="select select-bordered w-full md:w-1/2"
+                    onchange="filterCountries()">
+                <option value="">All Regions</option>
+                <option value="African Continent">African Continent</option>
+                <option value="The Americas">The Americas</option>
+                <option value="Asian Continent">Asian Continent</option>
+                <option value="European Union & Neighbors">European Union & Neighbors</option>
+                <option value="Pacific Region">Pacific Region</option>
+            </select>
+        </div>
+
+        <!-- Countries Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <% countries.forEach(country => { %>
+                <div class="card bg-base-100 shadow-xl country-card" 
+                     data-name="<%= country.commonName.toLowerCase() %>"
+                     data-region="<%= country.SubRegion.region %>">
+                    <div class="card-body">
+                        <h2 class="card-title">
+                            <%= country.commonName %> <%= country.flag %>
+                        </h2>
+                        <div class="space-y-2">
+                            <p><strong>Official Name:</strong> <%= country.officialName %></p>
+                            <p><strong>Capital:</strong> <%= country.capital %></p>
+                            <p><strong>Region:</strong> <%= country.SubRegion.region %></p>
+                            <p><strong>Sub-Region:</strong> <%= country.SubRegion.subRegion %></p>
+                            <p><strong>Population:</strong> <%= country.population.toLocaleString() %></p>
+                            <p><strong>Area:</strong> <%= country.area.toLocaleString() %> km²</p>
+                            <p><strong>Languages:</strong> <%= country.languages %></p>
+                            <p><strong>Currencies:</strong> <%= country.currencies %></p>
+                            <p><strong>Landlocked:</strong> <%= country.landlocked ? 'Yes' : 'No' %></p>
+                            <% if (country.openStreetMaps) { %>
+                                <p><strong>Map:</strong> 
+                                    <a href="<%= country.openStreetMaps %>" 
+                                       target="_blank" 
+                                       class="link link-primary">View on OpenStreetMap</a>
+                                </p>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer footer-center p-10 bg-base-200 text-base-content rounded">
+        <nav class="grid grid-flow-col gap-4">
+            <a href="/about">About</a>
+            <a href="/countries">Countries</a>
+        </nav> 
+        <aside>
+            <p>Copyright © 2024 - All right reserved</p>
+        </aside>
+    </footer>
+
+    <script>
+    function filterCountries() {
+        const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+        const selectedRegion = document.getElementById('regionFilter').value;
+        const cards = document.querySelectorAll('.country-card');
+
+        cards.forEach(card => {
+            const countryName = card.dataset.name;
+            const region = card.dataset.region;
+            const matchesSearch = countryName.includes(searchTerm);
+            const matchesRegion = !selectedRegion || region === selectedRegion;
+
+            card.style.display = (matchesSearch && matchesRegion) ? '' : 'none';
+        });
+    }
+    </script>
+</body>
+</html>

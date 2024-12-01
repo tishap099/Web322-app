@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About - Global Nations</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@4.4.19/dist/full.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <div class="navbar bg-base-100">
+      <div class="flex-1">
+        <a href="/" class="btn btn-ghost text-xl">Global Nations</a>
+      </div>
+      <div class="flex-none">
+        <ul class="menu menu-horizontal px-1">
+          <li><a href="/">Featured Countries</a></li>
+          <li><a href="/about" class="active">About</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <main class="container mx-auto px-4 py-8">
+      <div class="max-w-3xl mx-auto">
+        <h1 class="text-4xl font-bold text-center mb-8">About Global Nations</h1>
+        
+        <div class="prose lg:prose-lg mx-auto">
+          <section class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Project Overview</h2>
+            <p>
+              Global Nations is a web application developed as part of the WEB322 course at Seneca College. 
+              The application serves as a comprehensive database of countries, providing detailed information 
+              about nations around the world.
+            </p>
+          </section>
+
+          <section class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Features</h2>
+            <ul class="list-disc pl-6">
+              <li>Browse and search countries</li>
+              <li>Filter countries by region</li>
+              <li>View detailed country information including:
+                <ul class="list-circle pl-6">
+                  <li>Official and common names</li>
+                  <li>Capital cities</li>
+                  <li>Population and area statistics</li>
+                  <li>Languages and currencies</li>
+                  <li>Geographic information</li>
+                </ul>
+              </li>
+              <li>Interactive maps via OpenStreetMap links</li>
+            </ul>
+          </section>
+
+          <section class="mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Technologies Used</h2>
+            <ul class="list-disc pl-6">
+              <li>Node.js and Express.js for the backend</li>
+              <li>PostgreSQL with Sequelize ORM for data management</li>
+              <li>EJS templating engine for dynamic content</li>
+              <li>Tailwind CSS and DaisyUI for styling</li>
+            </ul>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer footer-center p-10 bg-base-200 text-base-content rounded">
+      <nav class="grid grid-flow-col gap-4">
+        <a href="/about">About</a>
+      </nav> 
+      <aside>
+        <p>Copyright © 2024 - All right reserved</p>
+      </aside>
+    </footer>
+  </body>
+</html>

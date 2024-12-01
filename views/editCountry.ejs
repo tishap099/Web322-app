@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit <%= country.commonName %> - Global Nations</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.19/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar bg-base-100">
+        <div class="flex-1">
+            <a href="/" class="btn btn-ghost text-xl">Global Nations</a>
+        </div>
+        <div class="flex-none">
+            <ul class="menu menu-horizontal px-1">
+                <li><a href="/">Featured Countries</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/addCountry">Add to Collection</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-4 py-8">
+        <h1 class="text-4xl font-bold text-center mb-8">Edit Country: <%= country.commonName %></h1>
+
+        <form action="/editCountry" method="POST" class="max-w-2xl mx-auto space-y-4">
+            <div class="form-control">
+                <label class="label">
+                    <span class="label-text">Common Name</span>
+                </label>
+                <input type="text" name="commonName" value="<%= country.commonName %>" class="input input-bordered" required>
+            </div>
+
+            <div class="form-control">
+                <label class="label">
+                    <span class="label-text">Official Name</span>
+                </label>
+                <input type="text" name="officialName" value="<%= country.officialName %>" class="input input-bordered" required>
+            </div>
+
+            <div class="form-control">
+                <label class="label">
+                    <span class="label-text">Native Name</span>
+                </label>
+                <input type="text" name="nativeName" value="<%= country.nativeName %>" class="input input-bordered" required>
+            </div>
+
+            <div class="form-control">
+                <label class="label">
+                    <span class="label-text">ISO Numeric-3 Code (ID)</span>
+                </label>
+                <input type="text" name="id" value="<%= country.id %>" class="input input-bordered cursor-not-allowed" readonly required>
+            </div>
+
+            <div class="form-control">
+                <label class="label">
+                    <span class="label-text">Capital</span>
+                </label>
+                <input type="text" name="capital" value="<%= country.capital %>" class="input input-bordered" required>
+            </div>
+
+            <div class="form-control">
+                <label class="label">
+                    <span class="label-text">Languages</span>
+                </label>
+                <input type="text" name="languages" value="<%= country.languages %>" class="input input-bordered" required>
+            </div>
+
+            <div class="form-control">
+                <label class="label">
+                    <span class="label-text">Population</span>
+                </label>
+                <input type="number" name="population" value="<%= country.population %>" class="input input-bordered" required>
+            </div>
+
+            <div class="form-control">
+                <label class="label">
+                    <span class="label-text">Area (km²)</span>
+                </label>
+                <input type="number" name="area" value="<%= country.area %>" class="input input-bordered" required>
+            </div>
+
+            <div class="form-control">
+                <label class="label">
+                    <span class="label-text">Currencies</span>
+                </label>
+                <input type="text" name="currencies" value="<%= country.currencies %>" class="input input-bordered" required>
+            </div>
+
+            <div class="form-control">
+                <label class="label">
+                    <span class="label-text">Sub Region</span>
+                </label>
+                <select name="subRegionId" class="select select-bordered" required>
+                    <% subRegions.forEach(subRegion => { %>
+                        <option value="<%= subRegion.id %>" <%= (country.subRegionId == subRegion.id) ? "selected" : "" %>>
+                            <%= subRegion.subRegion %>
+                        </option>
+                    <% }); %>
+                </select>
+            </div>
+
+            <div class="form-control">
+                <label class="label cursor-pointer">
+                    <span class="label-text">Landlocked</span>
+                    <input type="checkbox" name="landlocked" class="checkbox" <%= country.landlocked ? 'checked' : '' %>>
+                </label>
+            </div>
+
+            <div class="form-control">
+                <label class="label">
+                    <span class="label-text">OpenStreetMaps URL</span>
+                </label>
+                <input type="text" name="openStreetMaps" value="<%= country.openStreetMaps %>" class="input input-bordered">
+            </div>
+
+            <div class="form-control">
+                <label class="label">
+                    <span class="label-text">Flag Emoji</span>
+                </label>
+                <input type="text" name="flag" value="<%= country.flag %>" class="input input-bordered" required>
+            </div>
+
+            <div class="form-control">
+                <label class="label">
+                    <span class="label-text">Coat of Arms URL</span>
+                </label>
+                <input type="text" name="coatOfArms" value="<%= country.coatOfArms %>" class="input input-bordered" required>
+            </div>
+
+            <div class="form-control mt-6 flex-row gap-4 justify-end">
+                <a href="/deleteCountry/<%= country.id %>" class="btn btn-error">Delete Country</a>
+                <button type="submit" class="btn btn-primary">Update Country</button>
+            </div>
+        </form>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer footer-center p-10 bg-base-200 text-base-content rounded">
+        <nav class="grid grid-flow-col gap-4">
+            <a href="/about">About</a>
+        </nav> 
+        <aside>
+            <p>Copyright © 2024 - All right reserved</p>
+        </aside>
+    </footer>
+</body>
+</html>

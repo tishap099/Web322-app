@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Global Nations</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.19/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar bg-base-100">
+        <div class="flex-1">
+            <a href="/" class="btn btn-ghost text-xl">Global Nations</a>
+        </div>
+        <div class="flex-none">
+            <ul class="menu menu-horizontal px-1">
+                <li><a href="/" class="active">Featured Countries</a></li>
+                <li><a href="/about">About</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <div class="hero min-h-[50vh] bg-base-200">
+        <div class="hero-content text-center">
+            <div class="max-w-md">
+                <h1 class="text-5xl font-bold">Welcome to Global Nations</h1>
+                <p class="py-6">Explore detailed information about countries around the world.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Featured Countries -->
+    <div class="container mx-auto px-4 py-8">
+        <h2 class="text-3xl font-bold text-center mb-8">Featured Countries</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <% countries.forEach(country => { %>
+                <div class="card bg-base-100 shadow-xl">
+                    <div class="card-body">
+                        <h2 class="card-title">
+                            <%= country.commonName %> <%= country.flag %>
+                        </h2>
+                        <p><strong>Capital:</strong> <%= country.capital %></p>
+                        <p><strong>Region:</strong> <%= country.SubRegion.region %></p>
+                        <p><strong>Population:</strong> <%= country.population.toLocaleString() %></p>
+                        <div class="card-actions justify-end">
+                            <a href="/country/<%= country.id %>" class="btn btn-primary btn-sm">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer footer-center p-10 bg-base-200 text-base-content rounded">
+        <nav class="grid grid-flow-col gap-4">
+            <a href="/about">About</a>
+        </nav> 
+        <aside>
+            <p>Copyright © 2024 - All right reserved</p>
+        </aside>
+    </footer>
+</body>
+</html>
